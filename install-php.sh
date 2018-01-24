@@ -12,20 +12,13 @@ TMP="curl-dev \
     libpng-dev \
     libwebp-dev \
     libxml2-dev \
-    openldap-dev \
-    postgresql-dev"
+    openldap-dev"
 apk add $TMP
 
 # Configure extensions
 docker-php-ext-configure gd --with-jpeg-dir=usr/ --with-freetype-dir=usr/ --with-webp-dir=usr/
 docker-php-ext-configure ldap --with-libdir=lib/
 docker-php-ext-configure pdo_dblib --with-libdir=lib/
-
-# Download mongo extension
-/usr/local/bin/pecl download mongodb && \
-    tar -C /usr/src/php/ext -xf mongo*.tgz && \
-    rm mongo*.tgz && \
-    mv /usr/src/php/ext/mongo* /usr/src/php/ext/mongodb
 
 docker-php-ext-install \
     curl \
@@ -34,10 +27,8 @@ docker-php-ext-install \
     gettext \
     intl \
     ldap \
-    mongodb \
     pdo_dblib \
-    pdo_mysql \
-    pdo_pgsql \
+    pdo_mysql
     xmlrpc \
     zip
 
