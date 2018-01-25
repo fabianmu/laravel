@@ -1,7 +1,7 @@
-FROM php:alpine
+FROM php:7.2-stretch
 LABEL maintainer="fabianmu <spam@fabian.mu>"
 
-RUN apk update && apk upgrade && apk add bash git
+RUN apt-get update && apt-get upgrade -y && apt-get install git bash catdoc -y
 
 # Install PHP extensions
 ADD install-php.sh /usr/sbin/install-php.sh
